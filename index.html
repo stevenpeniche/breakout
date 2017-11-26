@@ -46,6 +46,8 @@
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
 	document.addEventListener("mousemove", mouseMoveHandler, false);
+	document.addEventListener("touchstart", touchHandler);
+	document.addEventListener("touchmove", touchHandler);
 	function keyDownHandler(e) {
     if(e.keyCode == 39) {
       rightPressed = true;
@@ -68,6 +70,12 @@
     var relativeX = e.clientX - canvas.offsetLeft;
     if(relativeX > 0 && relativeX < canvas.width) {
       paddleX = relativeX - paddleWidth/2;
+    }
+	}
+
+	function touchHandler(e) {
+    if(e.touches) {
+			paddleX = e.touches[0].pageX - canvas.offsetLeft - paddleWidth/2;
     }
 	}
 
